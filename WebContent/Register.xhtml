@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"></link>
+
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="css/style.css" ></link>
+    </h:head>
+<h:body class="container">
+        <h:form class="form-signup">
+        <div class="form-group">
+        	<h:outputText value="Enter Your First Name:" />
+            <h:inputText id="fname" class="form-control" required="true"  value="#{registerBean.fname}" requiredMessage="Please enter your first name" />
+            <h:message for="fname" class="alert alert-warning" id="reqFname"/>
+        </div>
+        <div class="form-group">
+        	<h:outputText value="Enter Your Last Name:" />
+            <h:inputText id="lname" class="form-control" required="true"  value="#{registerBean.lname}" requiredMessage="Please enter your last name" />
+            <h:message for="lname" class="alert alert-warning" id="reqLname"/>
+        </div>
+      
+        <div class="form-group">
+        	<h:outputText value="Enter Your email ID:" />
+            <h:inputText id="email" class="form-control" validatorMessage="Email is invalid." value="#{registerBean.email}" required="true" requiredMessage="Please enter your email id">
+            </h:inputText>
+            <h:message for="email" class="alert alert-warning" id="reqEmail"/>
+        </div>
+        <div class="form-group">
+        	<h:outputText value="Enter Your phone Number:" />
+            <h:inputText id="contact" class="form-control"  value="#{registerBean.phNo}" validatorMessage="Phone is invalid." required="true" requiredMessage="Please enter your Contact" >
+            	  
+            </h:inputText>	
+            <h:message for="contact" class="alert alert-warning" id="reqContact"/>
+        </div>
+        <div class="form-group">
+        	<h:outputText value="Select Your Role :" />
+            <h:selectOneMenu value = "#{registerBean.role}">
+            	<f:selectItem itemValue = "Manager" itemLabel = "Manager" /> 
+ 			  	<f:selectItem itemValue = "User" itemLabel = "User" />
+            </h:selectOneMenu>
+            <h:message for="contact" class="alert alert-warning" id="reqRole"/>
+        </div>
+        <div class="form-group">
+        	<h:outputText value="Enter Your Address :" />
+            <h:inputText id="address" class="form-control" value="#{registerBean.address}" required="true" requiredMessage="Please enter your Contact" />
+            <h:message for="address" class="alert alert-warning" id="reqAddress"/>
+        </div>
+        <div class="form-group">
+        	<h:outputText value="Enter Your Username:" />
+            <h:inputText id="uname" class="form-control" value="#{registerBean.username}"  required="true" requiredMessage="Please enter your Username" />
+            <h:message for="uname" class="alert alert-warning" id="reqUname"/>
+        </div>
+        <div class="form-group">
+        	<h:outputText value="Enter Password :" />
+            <h:inputSecret id="pwd" class="form-control" value="#{registerBean.password}" required="true" requiredMessage="Please enter your password" />
+            <h:message for="pwd" class="alert alert-warning" id="reqPass"/>
+        </div>
+           	<h:commandButton value="Register" id="cButton" action="#{registerBean.registerUser}" class="btn btn-submit btn-block"/>
+            <h:outputLink value="Login.xhtml" class="btn btn-default btn-block">Home</h:outputLink>
+        </h:form>
+</h:body>
+</html>

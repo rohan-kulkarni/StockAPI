@@ -1,0 +1,18 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Package Files #
+
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+/nbproject
+/nbproject/private/
+/build/
+.DS_Store
+*/.DS_Store

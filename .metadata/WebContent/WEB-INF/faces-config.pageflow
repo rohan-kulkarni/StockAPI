@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15131182235080" configfile="/StockAPIEclipse/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="userhome.xhtml" x="384" y="372" id="pf15132245998836" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15132245998837 pf15133990695408 pf151340323405110 pf151340715583912" inlinks="pf15133913743494" path="/userhome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Update.xhtml" x="394" y="228" id="pf15132245998838" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" outlinks="pf15133893710480" inlinks="pf15132245998837 pf15133893710480" path="/Update.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="232" y="396" id="pf15133909265011" outlinks="pf15133909265012 pf15133913743494 pf15133913743495 pf15133916914097" inlinks="pf15133916914097" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="adminDashboard.xhtml" x="191" y="253" id="pf15133909265013" inlinks="pf15133909265012" path="/adminDashboard.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="ManagerHome.xhtml" x="400" y="513" id="pf15133913743496" inlinks="pf15133913743495" path="/ManagerHome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewManagers.xhtml" x="564" y="360" id="pf15133990695419" inlinks="pf15133990695408" path="/viewManagers.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="userManagers.xhtml" x="576" y="220" id="pf151340323405111" inlinks="pf151340323405110" path="/userManagers.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="createWatchlist.xhtml" x="569" y="464" id="pf151340715583913" outlinks="pf151340739728614" inlinks="pf151340715583912 pf151340739728614" path="/createWatchlist.xhtml"/>
+  <links id="pf15132245998837" target="pf15132245998838" source="pf15132245998836" outcome="update"/>
+  <links id="pf15133893710480" target="pf15132245998838" source="pf15132245998838" outcome="updateUser">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf15133909265012" target="pf15133909265013" source="pf15133909265011" outcome="Admin"/>
+  <links id="pf15133913743494" target="pf15132245998836" source="pf15133909265011" outcome="User"/>
+  <links id="pf15133913743495" target="pf15133913743496" source="pf15133909265011" outcome="Manager"/>
+  <links id="pf15133916914097" target="pf15133909265011" source="pf15133909265011" outcome="login">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf15133990695408" target="pf15133990695419" source="pf15132245998836" outcome="viewManagerProfiles"/>
+  <links id="pf151340323405110" target="pf151340323405111" source="pf15132245998836" outcome="myManagers"/>
+  <links id="pf151340715583912" target="pf151340715583913" source="pf15132245998836" outcome="myWatchlist"/>
+  <links id="pf151340739728614" target="pf151340715583913" source="pf151340715583913" outcome="Watchlist">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+</pageflow:Pageflow>
