@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.register.RegisterBean;
+
 @ManagedBean
 @SessionScoped
 public class UsersBean {
@@ -61,7 +62,9 @@ public void setWatchlist(String watchlist) {
 		UsersDAO b1=new UsersDAO();
 		String watchlistdata=b1.getUserWatchlist();
 		this.watchlist = watchlistdata;
-//		return this;
 		
 	}
+	
+	
+	
 }

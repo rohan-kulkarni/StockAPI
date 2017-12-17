@@ -28,6 +28,8 @@ import javax.net.ssl.X509TrustManager;
 import javax.servlet.http.HttpServletRequest;
 
 import com.login.DataConnect;
+import com.users.UsersBean;
+import com.users.UsersDAO;
 
 @ManagedBean
 @SessionScoped
@@ -182,13 +184,8 @@ public class StockApiBean {
 
     public String createDbRecord(String symbol, double price, int qty, double amt) {
         try {
-            //System.out.println("symbol: " + this.symbol + ", price: " + this.price + "\n");
-            //System.out.println("qty: " + this.qty + ", amt: " + this.amt + "\n");
-
             Connection conn = DataConnect.getConnection();
             Statement statement = conn.createStatement();
-            
-            //get userid
             Integer uid = Integer.parseInt((String) FacesContext.getCurrentInstance()
                     .getExternalContext()
                     .getSessionMap().get("uid"));
@@ -200,10 +197,13 @@ public class StockApiBean {
             System.out.println("amt:" + amt);
             statement.executeUpdate("INSERT INTO `purchase` (`id`, `uid`, `stock_symbol`, `qty`, `price`, `amt`) "
                     + "VALUES (NULL,'" + uid + "','" + symbol + "','" + qty + "','" + price + "','" + amt +"')");
-            
+            UsersDAO b=new UsersDAO();
+            if(b.putTransactionRecord(symbol,price,qty,amt)) {
+            	FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully purchased stock",""));
+            }
             statement.close();
             conn.close();
-            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully purchased stock",""));
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

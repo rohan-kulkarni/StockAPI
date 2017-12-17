@@ -97,11 +97,8 @@ public class UpdateBean {
 		this.lname=b.get("lname");
 		this.email=b.get("email");
 		this.PhNo=b.get("PhNo");
-		//this.username=b.username;
 		this.password= b.get("password");
 		this.address=b.get("address");
-//		return this;
-		
 	}
 	public String updateUser() {
         boolean valid = UpdateDAO.update(this);
