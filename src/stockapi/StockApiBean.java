@@ -413,4 +413,36 @@ public class StockApiBean {
     	
     	return false;
     }
+    public boolean sendRequest(String symbol, int quantity) {
+    	Connection conn = DataConnect.getConnection();
+    	try {
+    		 Integer uid = Integer.parseInt((String) FacesContext.getCurrentInstance()
+		                .getExternalContext()
+		                .getSessionMap().get("uid"));
+			 PreparedStatement ps = conn.prepareStatement("select mid from userManager where uid=?");
+			 ps.setInt(1, uid);
+			 ResultSet rs = ps.executeQuery();
+			 rs.next();
+			 int mid= rs.getInt(1);
+			 
+			 System.out.println(uid);
+			 ps = conn.prepareStatement("insert into Requests(`uid`,`mid`,`symbol`,`qty`) values(?,?,?,?)");
+			 ps.setInt(1,uid);
+			 ps.setInt(2,mid);
+			 ps.setString(3,symbol);
+			 ps.setInt(4, quantity);
+			 int i=ps.executeUpdate();
+            if(i>0) {
+        		return true;
+            	}
+            else {
+            	return false;
+            }
+        } catch (Exception e2) {
+            System.out.println(e2);
+            return false;
+        }
+	}
+    
+
 }

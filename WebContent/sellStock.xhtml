@@ -58,13 +58,19 @@
 							
 							<h:column>	
 								<h:selectBooleanCheckbox value="#{sellStock.l[admin.amount]}"></h:selectBooleanCheckbox>
+								<f:facet name="header">Select Stock to sell</f:facet>
 							</h:column>
 							<h:column>
 								<h:commandButton action="#{sellStock.test}" value="submit">
 									<f:param name="symbol" value="#{admin.symbol}"></f:param>
 								</h:commandButton>
+								
+								<h:commandButton action="#{sellStock.requestSale}" value="request Manager" name="REQUEST">
+									<f:param name="symbol" value="#{admin.symbol}"></f:param>
+								</h:commandButton>
 							</h:column>
 						</h:dataTable>
+						<h:outputLabel value="Enter Quantity to sell"></h:outputLabel>
 						<h:inputText value="#{sellStock.selectedQty}"></h:inputText>
 						
 					</h:form>

@@ -22,7 +22,6 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
-
 @ManagedBean
 @SessionScoped
 public class SellStock {
@@ -31,8 +30,7 @@ public class SellStock {
 	int SelectedQty;
 	double amt;
 	double price;
-	Map<Double, Boolean> l= new HashMap<Double , Boolean>();
-	
+	Map<Double, Boolean> l = new HashMap<Double, Boolean>();
 
 	public Map<Double, Boolean> getL() {
 		return l;
@@ -41,8 +39,6 @@ public class SellStock {
 	public void setL(Map<Double, Boolean> l) {
 		this.l = l;
 	}
-
-
 
 	public double getAmt() {
 		return amt;
@@ -55,7 +51,7 @@ public class SellStock {
 	public SellStock() {
 		sellStock();
 	}
-	
+
 	public String getSelectedSymbol() {
 		return selectedSymbol;
 	}
@@ -71,7 +67,6 @@ public class SellStock {
 	public void setAvailablestocks(List<Stock> availablestocks) {
 		this.availablestocks = availablestocks;
 	}
-	
 
 	public int getSelectedQty() {
 		return SelectedQty;
@@ -80,7 +75,7 @@ public class SellStock {
 	public void setSelectedQty(int selectedQty) {
 		SelectedQty = selectedQty;
 	}
-	
+
 	public double getPrice() {
 		return price;
 	}
@@ -88,33 +83,47 @@ public class SellStock {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 	public void test() {
-		Map<String,String> params =
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-	  String action = params.get("symbol");
-	  double price=0;
-	  for(Map.Entry<Double, Boolean> a: l.entrySet()) {
-		  if(a.getValue()) {
-			  price=a.getKey();
-		  }
-	  }
-	  
-	  StockApiBean b=new StockApiBean();
-	  if(b.Sell(action, this.SelectedQty, price)) {
-		  FacesContext facesContext = FacesContext.getCurrentInstance();
-  		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucessfully sold", "success"));
-	  }
-	  else {
-		  FacesContext facesContext = FacesContext.getCurrentInstance();
-  		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error", "error"));
-	  }
-	  
-	  System.out.println(price+"  "+this.SelectedQty+" "+action);
-	  
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String action = params.get("symbol");
+		double price = 0;
+		for (Map.Entry<Double, Boolean> a : l.entrySet()) {
+			if (a.getValue()) {
+				price = a.getKey();
+			}
+		}
+
+		StockApiBean b = new StockApiBean();
+		if (b.Sell(action, this.SelectedQty, price)) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucessfully sold", "success"));
+		} else {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error", "error"));
+		}
+
+		System.out.println(price + "  " + this.SelectedQty + " " + action);
+
 	}
+
+	public void requestSale() {
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String action = params.get("symbol");
+		StockApiBean b1 = new StockApiBean();
+		if (b1.sendRequest(action, this.SelectedQty)) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Request Sent", "success"));
+		} else {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error", "error"));
+		}
+
+	}
+
 	public void sellStock() {
-		StockApiBean b1=new StockApiBean();
-		List<Stock>b = b1.purchaseStock();
+		StockApiBean b1 = new StockApiBean();
+		List<Stock> b = b1.purchaseStock();
 		this.availablestocks = b;
 	}
 }
