@@ -7,9 +7,12 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -47,7 +50,7 @@ public class StockApiBean {
 
     private String selectedSymbol;
     private List<SelectItem> availableSymbols;
-
+    
     public String getPurchaseSymbol() {
         if (getRequestParameter("symbol") != null) {
             symbol = getRequestParameter("symbol");
@@ -181,7 +184,9 @@ public class StockApiBean {
     public void setTable2Markup(String table2Markup) {
         this.table2Markup = table2Markup;
     }
-
+    public String SellStock(String symbol, double price, int qty, double amt) {
+    	return "";
+    }
     public String createDbRecord(String symbol, double price, int qty, double amt) {
         try {
             Connection conn = DataConnect.getConnection();
@@ -195,8 +200,22 @@ public class StockApiBean {
             System.out.println("price:" + price);
             System.out.println("qty:" + qty);
             System.out.println("amt:" + amt);
-            statement.executeUpdate("INSERT INTO `purchase` (`id`, `uid`, `stock_symbol`, `qty`, `price`, `amt`) "
-                    + "VALUES (NULL,'" + uid + "','" + symbol + "','" + qty + "','" + price + "','" + amt +"')");
+            
+            
+            PreparedStatement ps = conn.prepareStatement("select * from purchase where stock_symbol = ? and uid = ?");
+			ps.setString(1, symbol);
+			ps.setInt(2, uid);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+            	int newqty=rs.getInt("qty");
+            	newqty = newqty+qty;
+            	statement.executeUpdate("update `purchase` set `qty`='" + newqty + "' where stock_symbol = '"+symbol+"'");
+            	
+            }
+            else {
+            	statement.executeUpdate("INSERT INTO `purchase` (`id`, `uid`, `stock_symbol`, `qty`) "
+                    + "VALUES (NULL,'" + uid + "','" + symbol + "','" + qty + "')");
+            }
             UsersDAO b=new UsersDAO();
             if(b.putTransactionRecord(symbol,price,qty,amt)) {
             	FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully purchased stock",""));
@@ -294,10 +313,104 @@ public class StockApiBean {
         return;
     }
 
-    public void purchaseStock() {
-        System.out.println("Calling function purchaseStock()");
-        System.out.println("stockSymbol: " + FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("stockSymbol"));
-        System.out.println("stockPrice" + FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("stockPrice"));
-        return;
+    public List<Stock> purchaseStock() {
+    	Connection conn = DataConnect.getConnection();
+    	List<Stock> listnew=new ArrayList<Stock>(); 
+		try {
+
+		
+        Integer uid = Integer.parseInt((String) FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getSessionMap().get("uid"));
+        
+        PreparedStatement ps = conn.prepareStatement("select * from purchase where uid = ?");
+		ps.setInt(1, uid);
+		Stock s=null;
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()) {
+        	s=new Stock();
+        	s.setSymbol(rs.getString("stock_symbol"));
+        	
+        	String url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="
+					+ rs.getString("stock_symbol") + "&interval=1min&apikey=AF93E6L5I01EA39O";
+			InputStream inputStream = new URL(url).openStream();
+
+			// convert the json string back to object
+			JsonReader jsonReader = Json.createReader(inputStream);
+			JsonObject mainJsonObj = jsonReader.readObject();
+			for (String key : mainJsonObj.keySet()) {
+				if (!key.equals("Meta Data")) {
+					JsonObject dataJsonObj = mainJsonObj.getJsonObject(key);
+
+					
+					for (String subKey : dataJsonObj.keySet()) {
+						
+						JsonObject subJsonObj = dataJsonObj.getJsonObject(subKey);
+						Double price=Double.parseDouble(subJsonObj.getString("4. close"));
+						s.setAmount(price);
+						int qty = rs.getInt("qty");
+						
+						s.setQty(qty);
+						break;
+
+					}
+
+				}
+			}
+        	
+        	listnew.add(s);
+        	
+        }
+       
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return listnew;
+    }
+    public boolean Sell(String symbol,int qty, double amount) {
+    	Connection conn = DataConnect.getConnection();
+        try {
+			Statement statement = conn.createStatement();
+			 Integer uid = Integer.parseInt((String) FacesContext.getCurrentInstance()
+		                .getExternalContext()
+		                .getSessionMap().get("uid"));
+			 PreparedStatement ps = conn.prepareStatement("select * from purchase where stock_symbol = ? and uid = ?");
+				ps.setString(1, symbol);
+				ps.setInt(2, uid);
+	            ResultSet rs = ps.executeQuery();
+	            if(rs.next()) {
+	            	int newqty=rs.getInt("qty");
+	            	newqty = newqty-qty;
+	            	if(newqty<0) {
+	            		
+	            		return false;
+	            	}
+	            	else {
+	            		double prices=qty*amount;
+	            		Date d=new Date();
+	            		statement.executeUpdate("update `purchase` set `qty`='" + newqty + "' where stock_symbol = '"+symbol+"' and uid ='"+uid+"'");
+	            		statement.executeUpdate("update `users` set `balance`= `balance`+'" + prices + "' where uid ='"+uid+"'");
+	            		statement.executeUpdate("INSERT INTO `transactions` (`uid`, `symbol`,`type`, `quantity`,`amount`,`price`,`date`) "
+	                            + "VALUES ('" + uid + "','" + symbol + "','SALE','" + qty + "','"+prices+"','"+amount+"','"+d.toString()+"')");
+	            		return true;
+	            	}
+	            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
+        
+    	
+    	
+    	
+    	return false;
     }
 }

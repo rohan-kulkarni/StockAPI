@@ -13,6 +13,14 @@ import com.register.RegisterBean;
 @SessionScoped
 public class UsersBean {
 List<RegisterBean> list;
+List<Transactions> trans;
+public List<Transactions> getTrans() {
+	return trans;
+}
+
+public void setTrans(List<Transactions> trans) {
+	this.trans = trans;
+}
 String watchlist;
 	
 	public String getWatchlist() {
@@ -34,6 +42,7 @@ public void setWatchlist(String watchlist) {
 	public UsersBean() {
 		getData();
 		getUserWatchlist();
+		getUserTransactions();
 	}
 	
 	public void getData() {
@@ -64,6 +73,11 @@ public void setWatchlist(String watchlist) {
 		this.watchlist = watchlistdata;
 		
 	}
+	public void getUserTransactions(){
+		UsersDAO b1=new UsersDAO();
+		List<Transactions> data=b1.getUserTransactions();
+		this.trans = data;
+	} 
 	
 	
 	

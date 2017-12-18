@@ -84,5 +84,30 @@
 			<to-view-id>/createWatchlist.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>userhome.xhtml</display-name>
+		<from-view-id>/userhome.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>sellstock</from-outcome>
+			<to-view-id>/sellStock.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>userhome.xhtml</display-name>
+		<from-view-id>/userhome.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>accountHistory</from-outcome>
+			<to-view-id>/viewAccountHistory.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>viewAccountHistory.xhtml</display-name>
+		<from-view-id>/viewAccountHistory.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/userhome.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

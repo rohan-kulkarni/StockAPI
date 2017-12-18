@@ -87,7 +87,7 @@ public class UsersDAO {
 					if (!key.equals("Meta Data")) {
 						JsonObject dataJsonObj = mainJsonObj.getJsonObject(key);
 
-						;
+						
 						for (String subKey : dataJsonObj.keySet()) {
 
 							JsonObject subJsonObj = dataJsonObj.getJsonObject(subKey);
@@ -166,6 +166,7 @@ public class UsersDAO {
 			
 			if(balanceavail>amt) {
 				Date d=new Date();
+				
 				ps = con.prepareStatement("insert into transactions(uid,symbol,type,quantity,amount,price,date) values(?,?,?,?,?,?,?)");
 				ps.setInt(1, uid);
 				ps.setString(2, symbol);
@@ -197,5 +198,35 @@ public class UsersDAO {
 		
 		return true;
 	}
+	
+	public List<Transactions> getUserTransactions(){
+		List<Transactions> data=new ArrayList<Transactions>();
+		int uid = Integer.parseInt(
+				(String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("uid"));
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement("select * from transactions where uid=?");
+			ps.setInt(1, uid);
+			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
+			System.out.println(uid);
+			Transactions b=null;
+			while(rs.next()) {
+				b=new Transactions();
+				b.setSymbol(rs.getString("symbol"));
+				b.setD(rs.getString("date"));
+				b.setAmount(Double.parseDouble(rs.getString("amount")));
+				b.setPrice(Double.parseDouble(rs.getString("price")));
+				b.setQty(Integer.parseInt(rs.getString("quantity")));
+				b.setType(rs.getString("type"));
+				data.add(b);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+	
 
 }
