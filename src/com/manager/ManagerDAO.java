@@ -1,5 +1,8 @@
 package com.manager;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 
 import com.db.singleton.DatabaseConnection;
 import com.login.DataConnect;
 import com.register.RegisterBean;
+import com.users.Requests;
 
 public class ManagerDAO {
 	static Connection con = DatabaseConnection.getConnection();
@@ -47,6 +54,63 @@ public class ManagerDAO {
 	        }
 			return b1;
 	}
+	
+	public List<Requests> getUserRequests(){
+		List<Requests> req=new ArrayList<Requests>();
+		Requests r=null;
+		String uid=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("uid");
+		try {
+            con = DataConnect.getConnection();
+           PreparedStatement ps = con.prepareStatement("select * from Requests where mid=?");
+            ps.setString(1, uid);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(uid);
+            while (rs.next()) {
+            	r=new Requests();
+            	r.setUserid(Integer.parseInt(rs.getString("uid")));
+            	r.setMid(Integer.parseInt(rs.getString("mid")));
+            	r.setQty(Integer.parseInt(rs.getString("qty")));
+            	r.setSymbols(rs.getString("Symbol"));
+            	
+            	String url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="
+						+ rs.getString("symbol") + "&interval=1min&apikey=AF93E6L5I01EA39O";
+				InputStream inputStream = new URL(url).openStream();
+
+				// convert the json string back to object
+				JsonReader jsonReader = Json.createReader(inputStream);
+				JsonObject mainJsonObj = jsonReader.readObject();
+				for (String key : mainJsonObj.keySet()) {
+					if (!key.equals("Meta Data")) {
+						JsonObject dataJsonObj = mainJsonObj.getJsonObject(key);
+
+						
+						for (String subKey : dataJsonObj.keySet()) {
+
+							JsonObject subJsonObj = dataJsonObj.getJsonObject(subKey);
+							 String curr=subJsonObj.getString("4. close");
+							 r.setCurrprice(Double.parseDouble(curr));
+							break;
+
+						}
+
+					}
+				}
+            	
+            	//r.setPhNo(rs.getString("symbol"));
+            	req.add(r);
+                
+            }
+            //System.out.println(b.fname);
+        } catch (SQLException | IOException ex) {
+            System.out.println("Login error -->" + ex.getMessage());
+        } finally {
+
+        }
+		
+		return req;
+	}
+	
+	
 	public boolean addManager(String Username) {
 		try {
 			System.out.println(Username);

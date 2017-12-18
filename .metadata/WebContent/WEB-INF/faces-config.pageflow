@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15131182235080" configfile="/StockAPIEclipse/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="userhome.xhtml" x="338" y="946" id="pf15132245998836" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf15132245998837 pf15133990695408 pf151340323405110 pf151340715583912 pf151353603967316 pf15135601511483" inlinks="pf15133913743494 pf15135602120675" path="/userhome.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="Update.xhtml" x="390" y="780" id="pf15132245998838" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf15133893710480" inlinks="pf15132245998837 pf15133893710480" path="/Update.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="946" id="pf15133909265011" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf15133909265012 pf15133913743494 pf15133913743495 pf15133916914097" inlinks="pf15133916914097" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="userhome.xhtml" x="338" y="946" id="pf15132245998836" referenceLink="//@navigationRule.27/@navigationCase.0/@toViewId|" outlinks="pf15132245998837 pf15133990695408 pf151340323405110 pf151340715583912 pf151353603967316 pf15135601511483" inlinks="pf15133913743494 pf15135602120675 pf151356408753017 pf151356408753018 pf151356408753019 pf151356408753020 pf151356408753021" path="/userhome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Update.xhtml" x="390" y="780" id="pf15132245998838" referenceLink="//@navigationRule.23/@fromViewId|" outlinks="pf15133893710480 pf151356408753017" inlinks="pf15132245998837 pf15133893710480" path="/Update.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="946" id="pf15133909265011" referenceLink="//@navigationRule.16/@navigationCase.0/@toViewId|" outlinks="pf15133909265012 pf15133913743494 pf15133913743495 pf15133916914097" inlinks="pf15133916914097 pf151356315933312" path="/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="adminDashboard.xhtml" x="203" y="828" id="pf15133909265013" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15133909265012" path="/adminDashboard.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="ManagerHome.xhtml" x="212" y="1164" id="pf15133913743496" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf15133913743495" path="/ManagerHome.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="viewManagers.xhtml" x="558" y="804" id="pf15133990695419" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf15133990695408" path="/viewManagers.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="userManagers.xhtml" x="554" y="946" id="pf151340323405111" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf151340323405110" path="/userManagers.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="createWatchlist.xhtml" x="468" y="1080" id="pf151340715583913" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" outlinks="pf151340739728614" inlinks="pf151340715583912 pf151340739728614" path="/createWatchlist.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="sellStock.xhtml" x="379" y="1176" id="pf151353603967417" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" inlinks="pf151353603967316" path="/sellStock.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="viewAccountHistory.xhtml" x="642" y="1044" id="pf15135601511484" outlinks="pf15135602120675" inlinks="pf15135601511483" path="/viewAccountHistory.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="ManagerHome.xhtml" x="203" y="492" id="pf15133913743496" referenceLink="//@navigationRule.22/@navigationCase.0/@toViewId|" outlinks="pf15135631083606 pf15135631083607 pf15135631083608 pf151356315933312 pf151356341532914" inlinks="pf15133913743495 pf151356408753022 pf151356408753023 pf151356408753024 pf151356472097926" path="/ManagerHome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewManagers.xhtml" x="558" y="804" id="pf15133990695419" referenceLink="//@navigationRule.24/@fromViewId|" outlinks="pf151356408753018" inlinks="pf15133990695408" path="/viewManagers.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="userManagers.xhtml" x="554" y="946" id="pf151340323405111" referenceLink="//@navigationRule.25/@fromViewId|" outlinks="pf151356408753019" inlinks="pf151340323405110" path="/userManagers.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="createWatchlist.xhtml" x="468" y="1080" id="pf151340715583913" referenceLink="//@navigationRule.26/@fromViewId|" outlinks="pf151340739728614 pf151356408753020" inlinks="pf151340715583912 pf151340739728614" path="/createWatchlist.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sellStock.xhtml" x="379" y="1176" id="pf151353603967417" referenceLink="//@navigationRule.27/@fromViewId|" outlinks="pf151356408753021" inlinks="pf151353603967316" path="/sellStock.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewAccountHistory.xhtml" x="642" y="1044" id="pf15135601511484" referenceLink="//@navigationRule.12/@fromViewId|" outlinks="pf15135602120675" inlinks="pf15135601511483" path="/viewAccountHistory.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="managerWatchlist.xhtml" x="501" y="361" id="pf15135631083609" referenceLink="//@navigationRule.19/@fromViewId|" outlinks="pf151356408753022 pf151356903272027" inlinks="pf15135631083608 pf151356903272027" path="/managerWatchlist.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="ViewManagerAccount.xhtml" x="536" y="484" id="pf151356310836010" referenceLink="//@navigationRule.20/@fromViewId|" outlinks="pf151356408753023" inlinks="pf15135631083607" path="/ViewManagerAccount.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewRequests.xhtml" x="517" y="621" id="pf151356310836011" referenceLink="//@navigationRule.22/@fromViewId|" outlinks="pf151356408753025 pf151356408753024" inlinks="pf15135631083606 pf151356408753025" path="/viewRequests.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="updateManagerProfile.xhtml" x="-24" y="484" id="pf151356341532915" referenceLink="//@navigationRule.18/@navigationCase.0/@toViewId|" outlinks="pf151356344813016 pf151356472097926" inlinks="pf151356341532914 pf151356344813016" path="/updateManagerProfile.xhtml"/>
   <links id="pf15132245998837" target="pf15132245998838" source="pf15132245998836" outcome="update"/>
   <links id="pf15133909265012" target="pf15133909265013" source="pf15133909265011" outcome="Admin"/>
   <links id="pf15133913743494" target="pf15132245998836" source="pf15133909265011" outcome="User"/>
@@ -35,4 +39,33 @@
   </links>
   <links id="pf15135601511483" target="pf15135601511484" source="pf15132245998836" outcome="accountHistory"/>
   <links id="pf15135602120675" target="pf15132245998836" source="pf15135601511484" outcome="home"/>
+  <links id="pf15135631083606" target="pf151356310836011" source="pf15133913743496" outcome="requests"/>
+  <links id="pf15135631083607" target="pf151356310836010" source="pf15133913743496" outcome="accountHistory"/>
+  <links id="pf15135631083608" target="pf15135631083609" source="pf15133913743496" outcome="watchlist"/>
+  <links id="pf151356315933312" target="pf15133909265011" source="pf15133913743496" outcome="logout"/>
+  <links id="pf151356341532914" target="pf151356341532915" source="pf15133913743496" outcome="update"/>
+  <links id="pf151356344813016" target="pf151356341532915" source="pf151356341532915" outcome="updateManager">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf151356408753022" target="pf15133913743496" source="pf15135631083609" outcome="home"/>
+  <links id="pf151356408753023" target="pf15133913743496" source="pf151356310836010" outcome="home"/>
+  <links id="pf151356408753025" target="pf151356310836011" source="pf151356310836011">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf151356408753024" target="pf15133913743496" source="pf151356310836011" outcome="home"/>
+  <links id="pf151356408753017" target="pf15132245998836" source="pf15132245998838" outcome="home"/>
+  <links id="pf151356408753018" target="pf15132245998836" source="pf15133990695419" outcome="home"/>
+  <links id="pf151356408753019" target="pf15132245998836" source="pf151340323405111" outcome="home"/>
+  <links id="pf151356408753020" target="pf15132245998836" source="pf151340715583913" outcome="home"/>
+  <links id="pf151356408753021" target="pf15132245998836" source="pf151353603967417" outcome="home"/>
+  <links id="pf151356472097926" target="pf15133913743496" source="pf151356341532915" outcome="home"/>
+  <links id="pf151356903272027" target="pf15135631083609" source="pf15135631083609" outcome="watchlist">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
 </pageflow:Pageflow>

@@ -9,6 +9,14 @@
 <title></title>
 </head>
 <body>
+<span style="float:left;">
+                            <h:panelGroup rendered="#{not empty userBean.username}">
+                                <p>Welcome #{userBean.username}</p>
+           				
+                                
+                            </h:panelGroup>
+                        </span>
+                        <span style="float:right;"><h:link value="Home" outcome="home" style="text-align: right;"/></span>
 	<h:form>
     <h:dataTable border="1"  value="#{managerBean.list}" var="admin">
           

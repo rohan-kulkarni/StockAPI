@@ -33,12 +33,12 @@
                             <f:selectItems value="#{stockApiBean.availableSymbols}" />
                         </h:selectOneMenu>
                         <br />
-                        <h:commandButton value="Add To Watchlist" action="#{usersBean.addToWatchlist(stockApiBean.selectedSymbol)}" styleClass="btn btn-success" />
+                        <h:commandButton value="Add To Watchlist" action="#{managerBean.addToWatchlist(stockApiBean.selectedSymbol)}" styleClass="btn btn-success" />
                     </h:form>
                 </div>
 
                 <h:panelGroup rendered="#{not empty usersBean.watchlist}">
-                    <h:outputText value="#{usersBean.watchlist}" escape="false" styleClass="preformatted" />
+                    <h:outputText value="#{managerBean.watchlist}" escape="false" styleClass="preformatted" />
                 </h:panelGroup>
 
             </div>

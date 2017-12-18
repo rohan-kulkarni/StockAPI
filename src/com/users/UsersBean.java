@@ -14,6 +14,17 @@ import com.register.RegisterBean;
 public class UsersBean {
 List<RegisterBean> list;
 List<Transactions> trans;
+List<Requests> req;
+
+
+public List<Requests> getReq() {
+	return req;
+}
+
+public void setReq(List<Requests> req) {
+	this.req = req;
+}
+
 public List<Transactions> getTrans() {
 	return trans;
 }

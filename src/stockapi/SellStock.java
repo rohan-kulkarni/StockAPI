@@ -106,7 +106,7 @@ public class SellStock {
 		System.out.println(price + "  " + this.SelectedQty + " " + action);
 
 	}
-
+	
 	public void requestSale() {
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String action = params.get("symbol");

@@ -413,6 +413,53 @@ public class StockApiBean {
     	
     	return false;
     }
+    
+    
+    public boolean SellClients(String symbol,int qty, double amount,int uid) {
+    	Connection conn = DataConnect.getConnection();
+        try {
+        	 Integer mid = Integer.parseInt((String) FacesContext.getCurrentInstance()
+		                .getExternalContext()
+		                .getSessionMap().get("uid"));	
+			Statement statement = conn.createStatement();
+			 PreparedStatement ps = conn.prepareStatement("select * from purchase where stock_symbol = ? and uid = ?");
+				ps.setString(1, symbol);
+				ps.setInt(2, uid);
+				
+	            ResultSet rs = ps.executeQuery();
+	            if(rs.next()) {
+	            	int newqty=rs.getInt("qty");
+	            	newqty = newqty-qty;
+	            	if(newqty<0) {
+	            		
+	            		return false;
+	            	}
+	            	else {
+	            		double prices=qty*amount;
+	            		Date d=new Date();
+	            		statement.executeUpdate("update `purchase` set `qty`='" + newqty + "' where stock_symbol = '"+symbol+"' and uid ='"+uid+"'");
+	            		statement.executeUpdate("update `users` set `balance`= `balance`+'" + prices + "' where uid ='"+uid+"'");
+	            		statement.executeUpdate("INSERT INTO `transactions` (`uid`, `symbol`,`type`, `quantity`,`amount`,`price`,`date`) "
+	                            + "VALUES ('" + uid + "','" + symbol + "','SALE','" + qty + "','"+prices+"','"+amount+"','"+d.toString()+"')");
+	            		statement.executeUpdate("INSERT INTO `transactions` (`uid`, `symbol`,`type`, `quantity`,`amount`,`price`,`date`) "
+	                            + "VALUES ('" + mid + "','" + symbol + "','SALE-FOR:'"+uid+",'" + qty + "','"+prices+"','"+amount+"','"+d.toString()+"')");
+	            		return true;
+	            	}
+	            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
+        
+    	
+    	
+    	
+    	return false;
+    }
+    
+    
+    
     public boolean sendRequest(String symbol, int quantity) {
     	Connection conn = DataConnect.getConnection();
     	try {

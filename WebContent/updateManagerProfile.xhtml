@@ -4,17 +4,11 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
-    <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"></link>
-
-        <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="css/style.css" ></link>
-    </h:head>
-<h:body class="container">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
 <span style="float:left;">
                             <h:panelGroup rendered="#{not empty userBean.username}">
                                 <p>Welcome #{userBean.username}</p>
@@ -23,7 +17,7 @@
                             </h:panelGroup>
                         </span>
                         <span style="float:right;"><h:link value="Home" outcome="home" style="text-align: right;"/></span>
-        <h:form class="form-signup">
+<h:form class="form-signup">
         <div class="form-group" >
         
         	<h:outputText value="Enter Your First Name:" />
@@ -65,7 +59,6 @@
             <h:message for="pwd" class="alert alert-warning" id="reqPass"/>
         </div>
            	<h:commandButton value="Register" id="cButton" action="#{updateBean.updateUser}" class="btn btn-submit btn-block"/>
-            <h:outputLink value="Login.xhtml" class="btn btn-default btn-block">Home</h:outputLink>
         </h:form>
-</h:body>
+</body>
 </html>

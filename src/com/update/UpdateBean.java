@@ -13,7 +13,6 @@ import com.register.RegisterDAO;
 @SessionScoped
 public class UpdateBean {
 	String fname,lname,address,email,PhNo,password,username,role;
-//	username=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
 
 	public UpdateBean() {
 		this.username=(String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("username");
@@ -99,15 +98,22 @@ public class UpdateBean {
 		this.PhNo=b.get("PhNo");
 		this.password= b.get("password");
 		this.address=b.get("address");
+		this.role=b.get("role");
 	}
 	public String updateUser() {
         boolean valid = UpdateDAO.update(this);
         if (valid == true) {
         	FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN, "Values Updated",""));
-           return "updateUser";
+           if(this.role.equals("Manager")) {
+        	   return "updateManager";
+           }
+        	return "updateUser";
         } else {
         	FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN, "FUCKKK YOUUUUUUU",""));
-            return "updateUser";
+        	if(this.role.equals("Manager")) {
+         	   return "updateManager";
+            }
+         	return "updateUser";
         }
     }
 }
